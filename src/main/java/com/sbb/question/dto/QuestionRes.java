@@ -15,6 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 public class QuestionRes {
 
+    private Long id;
+
     private String subject;
 
     private String content;
@@ -24,6 +26,7 @@ public class QuestionRes {
     private List<Answer> answerList;
 
     public QuestionRes(Question question) {
+        this.id = question.getId();
         this.subject = question.getSubject();
         this.content = question.getContent();
         this.createDate = question.getCreateDate();

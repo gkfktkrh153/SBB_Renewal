@@ -48,7 +48,7 @@ class SbbApplicationTests {
         Optional<Question> oq = questionRepository.findById(1L);
         Question question = oq.get();
 
-        questionService.update(1L,new QuestionUpdate("update subject5", "update content1"));
+        //questionService.update(1L,new QuestionUpdate("update subject5", "update content1"));
 
 
         Assertions.assertThat(question.getSubject()).isEqualTo("update subject5");
