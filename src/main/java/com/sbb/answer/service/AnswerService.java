@@ -1,6 +1,7 @@
 package com.sbb.answer.service;
 
 
+import com.sbb.answer.controller.dto.AnswerReq;
 import com.sbb.answer.domain.Answer;
 import com.sbb.answer.repository.AnswerRepository;
 import com.sbb.question.domain.Question;
@@ -16,9 +17,9 @@ public class AnswerService {
 
     private final AnswerRepository answerRepository;
 
-    public void create(Question question, String content){
+    public void create(Question question, AnswerReq answerReq){
         Answer answer = Answer.builder()
-                        .content(content)
+                        .content(answerReq.getContent())
                         .question(question)
                         .createDate(LocalDateTime.now())
                         .build();

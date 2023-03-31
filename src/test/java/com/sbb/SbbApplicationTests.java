@@ -2,6 +2,7 @@ package com.sbb;
 
 import com.sbb.question.QuestionUpdate;
 import com.sbb.question.domain.Question;
+import com.sbb.question.dto.QuestionReq;
 import com.sbb.question.repository.QuestionRepository;
 import com.sbb.question.service.QuestionService;
 import jakarta.persistence.EntityManager;
@@ -29,30 +30,12 @@ class SbbApplicationTests {
     QuestionRepository questionRepository;
 
     @Test
-    void contextLoads() {
-        Question question = Question.builder()
-                .subject("sbb가 무엇인가요")
-                .content("sbb에 대해 알고싶습니다")
-                .createDate(LocalDateTime.now())
-                .build();
-
-        questionRepository.save(question);
-
-        List<Question> qList = questionRepository.findBySubjectLike("sbb%");
-        Question q = qList.get(0);
-        Assertions.assertThat("sbb가 무엇인가요?").isEqualTo(q.getSubject());
-    }
-    @Test
-    @Transactional
-    void testJpa(){
-        Optional<Question> oq = questionRepository.findById(1L);
-        Question question = oq.get();
-
-        //questionService.update(1L,new QuestionUpdate("update subject5", "update content1"));
-
-
-        Assertions.assertThat(question.getSubject()).isEqualTo("update subject5");
-
+    void testJpa() {
+        for (int i = 1; i <= 300; i++) {
+            String subject = String.format("테스트 데이터입니다:[%03d]", i);
+            String content = "내용무";
+            this.questionService.create(new QuestionReq(subject, content));
+        }
     }
 
 }
