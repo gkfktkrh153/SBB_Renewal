@@ -1,5 +1,6 @@
 package com.sbb.question.service;
 
+import com.sbb.member.domain.Member;
 import com.sbb.question.DataNotFoundException;
 import com.sbb.question.QuestionUpdate;
 import com.sbb.question.domain.Question;
@@ -41,13 +42,24 @@ public class QuestionService {
         }
     }
 
-    public void create(QuestionReq questionReq) {
+    public void create(QuestionReq questionReq, Member author) {
         Question question = Question.builder().
                 content(questionReq.getContent()).
                 subject(questionReq.getSubject()).
-                createDate(LocalDateTime.now())
-                .build();
+                author(author).
+                createDate(LocalDateTime.now()).
+                build();
 
         questionRepository.save(question);
+    }
+    @Transactional
+    public void modify(Question question, QuestionReq questionReq){
+        question.setSubject(questionReq.getSubject());
+        question.setContent(questionReq.getContent());
+        question.setModifyDate(LocalDateTime.now());
+
+    }
+    public void delete(Question question) {
+        this.questionRepository.delete(question);
     }
 }

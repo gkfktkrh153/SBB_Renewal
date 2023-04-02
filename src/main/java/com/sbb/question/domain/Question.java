@@ -1,6 +1,7 @@
 package com.sbb.question.domain;
 
 import com.sbb.answer.domain.Answer;
+import com.sbb.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,4 +29,9 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member author;
+
+    private LocalDateTime modifyDate;
 }

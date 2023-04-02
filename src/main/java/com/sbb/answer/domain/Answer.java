@@ -1,6 +1,7 @@
 package com.sbb.answer.domain;
 
 
+import com.sbb.member.domain.Member;
 import com.sbb.question.domain.Question;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,4 +27,8 @@ public class Answer {
     @ManyToOne(fetch =  FetchType.LAZY)
     private Question question;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member author;
+
+    private LocalDateTime modifyDate;
 }
